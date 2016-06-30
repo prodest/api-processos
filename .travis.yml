@@ -1,0 +1,11 @@
+require: sudo
+language: node_js
+services:
+  - docker
+script: 
+  docker build -t <nome_imagem> .
+deploy:
+  provider: script
+  script: docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push <nome_imagem>
+  on:
+    branch: master

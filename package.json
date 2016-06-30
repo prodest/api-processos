@@ -1,0 +1,29 @@
+{
+  "name": "api-processos",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node src/bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prodest/api-processos.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/prodest/api-processos/issues"
+  },
+  "homepage": "https://github.com/prodest/api-processos#readme",
+  "dependencies": {
+    "compression": "^1.6.2",
+    "debug": "^2.2.0",
+    "express": "^4.14.0",
+    "newrelic": "^1.28.1",
+    "soap-as-promised": "^1.15.1"
+  },
+  "devDependencies": {
+    "eslint": "^2.13.1",
+    "eslint-config-prodest": "^1.0.12"
+  }
+}
