@@ -7,6 +7,10 @@ module.exports = () => {
 
         sepService().getDocumentInfo( req.params.number )
             .then( result => {
+                if ( !result || typeof result !== 'object' ) {
+                    return res.json( {} );
+                }
+
                 const p = result.ProcessoHistorico;
 
                 const updates = p.Andamento.ProcessoLocalizacao.map( a => {
@@ -35,7 +39,7 @@ module.exports = () => {
             } )
             .catch( err => {
                 console.log( err );
-                return res.send( err.message );
+                return res.json( {} );
             } );
     };
 
