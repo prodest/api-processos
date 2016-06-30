@@ -12,7 +12,7 @@ module.exports = () => {
                     {
                         number: p.NumeroProcesso,
                         parts: p.Interessado.string,
-                        topic: p.Assunto,
+                        subject: p.Assunto,
                         summary: p.Resumo,
                         status: p.Situacao,
                         updates: p.Andamento.ProcessoLocalizacao,
