@@ -8,6 +8,16 @@ module.exports = () => {
         sepService().getDocumentInfo( req.params.number )
             .then( result => {
                 const p = result.ProcessoHistorico;
+
+                const updates = p.Andamento.ProcessoLocalizacao.map( a => {
+                    return {
+                        date: a.Data,
+                        agency: a.Orgao,
+                        area: a.Local,
+                        status: a.Situacao
+                    };
+                } );
+
                 const info =
                     {
                         number: p.NumeroProcesso,
@@ -15,7 +25,7 @@ module.exports = () => {
                         subject: p.Assunto,
                         summary: p.Resumo,
                         status: p.Situacao,
-                        updates: p.Andamento.ProcessoLocalizacao,
+                        updates: updates,
                         district: p.Municipio,
                         extra: p.IdentificacoesDiversas
                     };
