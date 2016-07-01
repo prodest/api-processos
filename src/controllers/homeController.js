@@ -8,7 +8,7 @@ module.exports = () => {
         sepService().getDocumentInfo( req.params.number )
             .then( result => {
                 if ( !result || typeof result !== 'object' ) {
-                    return res.json( {} );
+                    return res.json( undefined );
                 }
 
                 const p = result.ProcessoHistorico;
@@ -39,7 +39,7 @@ module.exports = () => {
             } )
             .catch( err => {
                 console.log( err );
-                return res.json( {} );
+                return res.json( undefined );
             } );
     };
 
