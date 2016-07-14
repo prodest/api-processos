@@ -3,15 +3,33 @@ const sepService = require( '../services/sep' );
 module.exports = () => {
     var homeController = new Object();
 
+    function notFound( res ) {
+        return res.status( 404 ).send( 'Processo não encontrado.' );
+    }
+
+    function serverError( res ) {
+        return res.status( 500 ).json( undefined );
+    }
+
     homeController.getSingle = ( req, res ) => {
 
-        sepService().getDocumentInfo( req.params.number )
+        const procNumber = req.params.number;
+
+        if ( !procNumber ) {
+            return notFound( res );
+        }
+
+        sepService().getDocumentInfo( procNumber )
             .then( result => {
                 if ( !result || typeof result !== 'object' ) {
-                    return res.json( undefined );
+                    return serverError;
                 }
 
                 const p = result.ProcessoHistorico;
+
+                if ( !p.Interessado ) {
+                    return notFound( res );
+                }
 
                 const updates = p.Andamento.ProcessoLocalizacao.map( a => {
                     return {
@@ -39,7 +57,7 @@ module.exports = () => {
             } )
             .catch( err => {
                 console.log( err );
-                return res.json( undefined );
+                serverError( res );
             } );
     };
 
