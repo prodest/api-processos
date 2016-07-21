@@ -1,3 +1,5 @@
+const moment = require( 'moment' );
+
 const sepService = require( '../services/sep' );
 
 module.exports = () => {
@@ -33,7 +35,7 @@ module.exports = () => {
 
                 const updates = p.Andamento.ProcessoLocalizacao.map( a => {
                     return {
-                        date: a.Data,
+                        date: moment( a.Data, 'DD/MM/YYYY HH:mm' ),
                         agency: a.Orgao,
                         area: a.Local,
                         status: a.Situacao
