@@ -17,7 +17,7 @@ module.exports = () => {
 
         const procNumber = req.params.number;
 
-        if ( !procNumber ) {
+        if ( !procNumber || procNumber.length <= 1 ) {
             return notFound( res );
         }
 
