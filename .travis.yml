@@ -2,10 +2,12 @@ require: sudo
 language: node_js
 services:
   - docker
+env:
+  - DOCKER_IMAGE=prodest/api-sep SERVICE_NAME=api-sep RANCHER_URL=http://cloud.datacenter.es.gov.br.local/v1/projects/1a4680 RANCHER_STACK=api RANCHER_COMPOSE_URL=http://cloud.datacenter.es.gov.br.local/v1/projects/1a4680/environments/1e56/composeconfig
 script: 
-  docker build -t prodest/api-sep .
+  /bin/sh .travis.sh
 deploy:
   provider: script
-  script: docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push prodest/api-sep
+  script: /bin/sh .deploy.sh
   on:
     branch: master
