@@ -21,11 +21,11 @@ app.use( apiMiddleware( {
 require( './routes/home' )( app );
 
 app.use( apiMiddleware( {
-   error: {
-       notFound: true,
-       debug: config.env === 'development'
-   }
-} ) );
+    error: {
+        notFound: true,
+        debug: config.env === 'development'
+    }
+}) );
 
 var pathApp = express();
 
