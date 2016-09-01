@@ -5,32 +5,32 @@ const sepService = require( '../services/sep' );
 module.exports = () => {
     var homeController = new Object();
 
-    function notFound( res ) {
-        return res.status( 404 ).send( 'Processo não encontrado.' );
+    function notFound( next ) {
+        let error = new Error('Processo não encontrado.');
+        error.status = 404;
+        error.handled = true;
+        error.userMessage = error.message;
+        next( error );
     }
-
-    function serverError( res ) {
-        return res.status( 500 ).json( undefined );
-    }
-
-    homeController.getSingle = ( req, res ) => {
+ 
+    homeController.getSingle = ( req, res, next ) => {
 
         const procNumber = req.params.number;
 
         if ( !procNumber || procNumber.length <= 1 ) {
-            return notFound( res );
+            return notFound( next );
         }
 
         sepService().getDocumentInfo( procNumber )
             .then( result => {
                 if ( !result || typeof result !== 'object' ) {
-                    return serverError;
+                    throw new Error("Result not expected.");
                 }
 
                 const p = result.ProcessoHistorico;
 
                 if ( !p.Interessado ) {
-                    return notFound( res );
+                    return notFound( next );
                 }
 
                 const updates = p.Andamento.ProcessoLocalizacao.map( a => {
@@ -58,8 +58,7 @@ module.exports = () => {
                 return res.json( info );
             } )
             .catch( err => {
-                console.log( err );
-                serverError( res );
+                next( err );
             } );
     };
 
