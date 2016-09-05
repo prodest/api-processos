@@ -6,25 +6,35 @@ module.exports = () => {
     var homeController = new Object();
 
     function notFound( next ) {
-        let error = new Error('Processo não encontrado.');
+        const error = new Error( 'Processo não encontrado.' );
         error.status = 404;
         error.handled = true;
         error.userMessage = error.message;
         next( error );
     }
- 
+
+    function wrongNumber( next ) {
+        const error = new Error( 'O número do processo deve possuir apenas números e ter entre 2 e 8 dígitos.' );
+        error.userMessage = error.message;
+        error.handled = true;
+        error.status = 400;
+
+        return next( error );
+    }
+
     homeController.getSingle = ( req, res, next ) => {
 
         const procNumber = req.params.number;
 
-        if ( !procNumber || procNumber.length <= 1 ) {
-            return notFound( next );
+        const mask = /^\d{2,8}$/;
+        if ( !mask.test( procNumber ) ) {
+            return wrongNumber( next );
         }
 
         sepService().getDocumentInfo( procNumber )
             .then( result => {
                 if ( !result || typeof result !== 'object' ) {
-                    throw new Error("Result not expected.");
+                    throw new Error( 'Result not expected.' );
                 }
 
                 const p = result.ProcessoHistorico;
