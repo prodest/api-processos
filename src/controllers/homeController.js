@@ -5,32 +5,43 @@ const sepService = require( '../services/sep' );
 module.exports = () => {
     var homeController = new Object();
 
-    function notFound( res ) {
-        return res.status( 404 ).send( 'Processo não encontrado.' );
+    function notFound( next ) {
+        const error = new Error( 'Processo não encontrado.' );
+        error.userMessage = error.message;
+        error.handled = true;
+        error.status = 404;
+
+        return next( error );
     }
 
-    function serverError( res ) {
-        return res.status( 500 ).json( undefined );
+    function wrongNumber( next ) {
+        const error = new Error( 'O número do processo deve possuir apenas números e ter entre 2 e 8 dígitos.' );
+        error.userMessage = error.message;
+        error.handled = true;
+        error.status = 400;
+
+        return next( error );
     }
 
-    homeController.getSingle = ( req, res ) => {
+    homeController.getSingle = ( req, res, next ) => {
 
         const procNumber = req.params.number;
 
-        if ( !procNumber || procNumber.length <= 1 ) {
-            return notFound( res );
+        const mask = /^\d{2,8}$/;
+        if ( !mask.test( procNumber ) ) {
+            return wrongNumber( next );
         }
 
         sepService().getDocumentInfo( procNumber )
             .then( result => {
                 if ( !result || typeof result !== 'object' ) {
-                    return serverError;
+                    return next( new Error( 'Erro a consultar o processo.' ) );
                 }
 
                 const p = result.ProcessoHistorico;
 
                 if ( !p.Interessado ) {
-                    return notFound( res );
+                    return notFound( next );
                 }
 
                 const updates = p.Andamento.ProcessoLocalizacao.map( a => {
@@ -58,8 +69,7 @@ module.exports = () => {
                 return res.json( info );
             } )
             .catch( err => {
-                console.log( err );
-                serverError( res );
+                next( err );
             } );
     };
 
