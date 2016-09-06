@@ -14,8 +14,15 @@ app.use( apiMiddleware( {
     cors: true,
     authentication: {
         jwtPublicKey: config.jwtPublicKey
+    },
+    limit: {
+        max: 300,
+        duration: 10 * 60 * 1000,
+        perSecond: 10,
+        redisUrl: config.redisUrl,
+        apiId: 'api-sep'
     }
-}) );
+} ) );
 
 // load our routes
 require( './routes/home' )( app );
@@ -25,9 +32,9 @@ app.use( apiMiddleware( {
         notFound: true,
         debug: config.env === 'development'
     }
-}) );
+} ) );
 
-var pathApp = express();
+let pathApp = express();
 
 let path = config.path;
 pathApp.use( path, app );
