@@ -1,6 +1,7 @@
 const moment = require( 'moment' );
 
 const sepService = require( '../services/sep' );
+const sep = require( '../config/sep' );
 
 module.exports = () => {
     var homeController = new Object();
@@ -61,7 +62,8 @@ module.exports = () => {
                         status: p.Situacao,
                         updates: updates,
                         district: p.Municipio,
-                        extra: p.IdentificacoesDiversas
+                        extra: p.IdentificacoesDiversas,
+                        pageUrl: sep.url_web + p.NumeroProcesso
                     };
 
 
