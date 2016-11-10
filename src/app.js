@@ -11,17 +11,7 @@ let app = express();
 
 app.use( apiMiddleware( {
     compress: true,
-    cors: true,
-    authentication: {
-        jwtPublicKey: config.jwtPublicKey
-    },
-    limit: {
-        max: 300,
-        duration: 10 * 60 * 1000,
-        perSecond: 10,
-        redisUrl: config.redisUrl,
-        apiId: 'api-sep'
-    }
+    cors: true
 } ) );
 
 // load our routes
