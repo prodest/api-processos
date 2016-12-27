@@ -1,4 +1,5 @@
 const config = require( './config/app' );
+const bodyParser = require( 'body-parser' );
 
 if ( config.env === 'production' ) {
     require( 'newrelic' );
@@ -9,6 +10,8 @@ const apiMiddleware = require( 'node-mw-api-prodest' ).middleware;
 
 let app = express();
 
+app.use( bodyParser.json() );
+
 app.use( apiMiddleware( {
     compress: true,
     cors: true
@@ -16,6 +19,7 @@ app.use( apiMiddleware( {
 
 // load our routes
 require( './routes/home' )( app );
+require( './routes/process' )( app );
 
 app.use( apiMiddleware( {
     error: {
