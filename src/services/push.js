@@ -5,7 +5,7 @@ module.exports = () => {
     var pushService = new Object();
 
     pushService.sendPush = ( data ) => {
-        const basicAuth = 'Basic ' + Buffer.from( push.username + ':' + push.password, 'base64' );
+        const basicAuth = 'Basic ' + Buffer.from( push.username + ':' + push.password ).toString( 'base64' );
 
         const options = {
             method: 'POST',
