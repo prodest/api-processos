@@ -4,37 +4,18 @@
  * Module dependencies.
  */
 
-var app = require( '../app' );
-var debug = require( 'debug' )( 'admin-app:server' );
-var http = require( 'http' );
-var config = require( '../config/app' );
+import app from '../app';
+import * as debugMudule from 'debug';
+import * as http from 'http';
+import config from '../config/app';
 
-/**
- * Get port from environment and store in Express.
- */
-
-var port = normalizePort( config.port );
-app.set( 'port', port );
-
-/**
- * Create HTTP server.
- */
-
-var server = http.createServer( app );
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-
-server.listen( port );
-server.on( 'error', onError );
-server.on( 'listening', onListening );
+const debug = debugMudule( 'admin-app:server' );
 
 /**
  * Normalize a port into a number, string, or false.
  */
 
-function normalizePort( val ) {
+const normalizePort = ( val ) => {
     var port = parseInt( val, 10 );
 
     if ( isNaN( port ) ) {
@@ -48,18 +29,18 @@ function normalizePort( val ) {
     }
 
     return false;
-}
+};
 
 /**
  * Event listener for HTTP server "error" event.
  */
 
-function onError( error ) {
+const onError = ( error ) => {
     if ( error.syscall !== 'listen' ) {
         throw error;
     }
 
-    var bind = typeof port === 'string'
+    const bind = typeof port === 'string'
         ? 'Pipe ' + port
         : 'Port ' + port;
 
@@ -76,17 +57,38 @@ function onError( error ) {
     default:
         throw error;
     }
-}
+};
 
 /**
  * Event listener for HTTP server "listening" event.
  */
 
-function onListening() {
+const onListening = () => {
     var addr = server.address();
     var bind = typeof addr === 'string'
         ? 'pipe ' + addr
         : 'port ' + addr.port;
     debug( 'Listening on ' + bind );
     console.log( `\nListening on ${bind}...` );
-}
+};
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+const port = normalizePort( config.port );
+app.set( 'port', port );
+
+/**
+ * Create HTTP server.
+ */
+
+const server = http.createServer( app );
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen( port );
+server.on( 'error', onError );
+server.on( 'listening', onListening );
