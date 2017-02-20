@@ -40,7 +40,10 @@ module.exports = () => {
 
                 return pushService.sendPush( pushData );
             } )
-            .then( () => res.send( 'ok' ) )
+            .then( () => {
+                console.log(`Atualização no processo ${data.number} enviada com sucesso ao push server.\n`);
+                res.send( 'ok' );
+            )
             .catch( error => next( error ) );
     };
 
