@@ -12,30 +12,13 @@ module.exports = () => {
             .then( usersToPush => {
                 const pushData = {
                     users: usersToPush,
-                    android: {
-                        collapseKey: 'optional',
-                        data: {
-                            message: `Processo ${data.number} atualizado`,
-                            appData: {
-                                state: 'app.sepConsulta/:processNumber',
-                                params: {
-                                    processNumber: `${data.number}`
-                                }
-                            }
-                        }
+                    title: '',
+                    message: `Processo ${data.number} atualizado`,
+                    state: 'app.sepConsulta/:processNumber',
+                    stateParams: {
+                        processNumber: `${data.number}`
                     },
-                    ios: {
-                        badge: 0,
-                        sound: 'soundName',
-                        alert: `Processo ${data.number} atualizado`,
-                        appData: {
-                            state: 'app.sepConsulta/:processNumber',
-                            params: {
-                                processNumber: `${data.number}`
-                            }
-                        }
-                    }
-
+                    icon: 'default'
                 };
 
                 return pushService.sendPush( pushData );
@@ -43,7 +26,7 @@ module.exports = () => {
             .then( () => {
                 console.log( `Atualização no processo ${data.number} enviada com sucesso ao push server.\n` );
                 return res.send( 'ok' );
-            })
+            } )
             .catch( error => next( error ) );
     };
 
