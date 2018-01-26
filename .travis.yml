@@ -11,6 +11,6 @@ script:
 deploy:
   provider: script
   skip_cleanup: true
-  script: scripts/deploy.sh api api prodest/api-sep
+  script: scripts/deploy.sh api api api-sep
   on:
     branch: master
