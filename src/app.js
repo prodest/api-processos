@@ -14,7 +14,8 @@ app.use( bodyParser.json() );
 
 app.use( apiMiddleware( {
     compress: true,
-    cors: true
+    cors: true,
+    log: true
 } ) );
 
 // load our routes
