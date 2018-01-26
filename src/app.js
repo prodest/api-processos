@@ -14,13 +14,17 @@ app.use( bodyParser.json() );
 
 app.use( apiMiddleware( {
     compress: true,
-    cors: true,
-    log: true
+    cors: true
 } ) );
 
 // load our routes
-require( './routes/home' )( app );
 require( './routes/process' )( app );
+
+app.use( apiMiddleware( {
+    log: true
+} ) );
+
+require( './routes/home' )( app );
 
 app.use( apiMiddleware( {
     error: {
