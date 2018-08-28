@@ -3,18 +3,19 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node src/bin/www"
+    "start": "node src/bin/www",
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/prodest/api-processos.git"
+    "url": "git+https://github.com/prodest/api-sep.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/prodest/api-processos/issues"
+    "url": "https://github.com/prodest/api-sep/issues"
   },
-  "homepage": "https://github.com/prodest/api-processos#readme",
+  "homepage": "https://github.com/prodest/api-sep#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "eslint": "^2.13.1",
-    "eslint-config-prodest": "^1.0.12"
+    "eslint-config-prodest": "^1.0.12",
+    "standard-version": "^4.4.0"
   }
 }
