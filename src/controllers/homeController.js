@@ -59,7 +59,7 @@ module.exports = () => {
                     {
                         number: p.NumeroEDocs || p.NumeroProcesso,
                         parts: p.Interessado.string,
-                        subject: p.Assunto,
+                        subject: p.ItemPlanoClassificacao || p.Assunto,
                         summary: p.Resumo,
                         status: p.Situacao,
                         updates: updates,
