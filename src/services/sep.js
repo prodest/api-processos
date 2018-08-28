@@ -10,7 +10,7 @@ module.exports = () => {
         };
 
         return soap.createClient( sep.service_url )
-        .then( client => client.ConsultarProcessoSimplesPorNumero( args ) );
+        .then( client => client.ConsultarProcessoSimplesPorString( args ) );
     };
 
     return sepService;

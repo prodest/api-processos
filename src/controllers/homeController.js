@@ -15,7 +15,7 @@ module.exports = () => {
     }
 
     function wrongNumber( next ) {
-        const error = new Error( 'O número do processo deve possuir apenas números e ter entre 2 e 8 dígitos.' );
+        const error = new Error( 'O número do processo está em um formato inválido.' );
         error.userMessage = error.message;
         error.handled = true;
         error.status = 400;
@@ -27,8 +27,10 @@ module.exports = () => {
 
         const procNumber = req.params.number;
 
-        const mask = /^\d{2,8}$/;
-        if ( !mask.test( procNumber ) ) {
+        const maskSigefes= /^\d{2,13}$/;
+        const maskEDocs= /^20\d{2}-[0-9b-df-hj-np-tv-xzB-DF-HJ-NP-TV-XZ]{5}$/;
+        const maskProtocol = /^\d{2,8}$/;
+        if ( !maskProtocol.test( procNumber ) && !maskEDocs.test( procNumber ) && !maskSigefes.test( procNumber )) {
             return wrongNumber( next );
         }
 
@@ -55,7 +57,7 @@ module.exports = () => {
 
                 const info =
                     {
-                        number: p.NumeroProcesso,
+                        number: p.NumeroEDocs || p.NumeroProcesso,
                         parts: p.Interessado.string,
                         subject: p.Assunto,
                         summary: p.Resumo,
