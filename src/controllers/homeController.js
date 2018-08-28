@@ -28,7 +28,7 @@ module.exports = () => {
         const procNumber = req.params.number;
 
         const maskSigefes= /^\d{2,13}$/;
-        const maskEDocs= /^20\d{2}-[0-9b-df-hj-np-tv-xzB-DF-HJ-NP-TV-XZ]{5}$/;
+        const maskEDocs= /^20\d{2}-*[0-9b-df-hj-np-tv-xzB-DF-HJ-NP-TV-XZ]{5}$/;
         const maskProtocol = /^\d{2,8}$/;
         if ( !maskProtocol.test( procNumber ) && !maskEDocs.test( procNumber ) && !maskSigefes.test( procNumber )) {
             return wrongNumber( next );
