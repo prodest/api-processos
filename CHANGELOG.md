@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.3"></a>
+## [1.1.3](https://github.com/prodest/api-sep/compare/v1.1.2...v1.1.3) (2018-09-03)
+
+
+### Bug Fixes
+
+* **android:** push notification icon ([822b349](https://github.com/prodest/api-sep/commit/822b349))
+
+
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://github.com/prodest/api-sep/compare/v1.1.1...v1.1.2) (2018-08-28)
 
