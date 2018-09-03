@@ -18,7 +18,7 @@ module.exports = () => {
                     stateParams: {
                         processNumber: `${data.number}`
                     },
-                    icon: 'default'
+                    icon: 'notification'
                 };
 
                 return pushService.sendPush( pushData );
