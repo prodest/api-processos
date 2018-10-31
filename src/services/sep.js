@@ -1,17 +1,16 @@
-const soap = require( 'soap-as-promised' );
-const sep = require( '../config/sep' );
+const soap = require('soap-as-promised');
+const sep = require('../config/sep');
 
 module.exports = () => {
-    var sepService = new Object();
+  var sepService = new Object();
 
-    sepService.getDocumentInfo = function( processNumber ) {
-        var args = {
-            numeroProcesso: processNumber
-        };
-
-        return soap.createClient( sep.service_url )
-        .then( client => client.ConsultarProcessoSimplesPorString( args ) );
+  sepService.getDocumentInfo = function(processNumber) {
+    var args = {
+      numeroProcesso: processNumber
     };
 
-    return sepService;
+    return soap.createClient(sep.service_url).then(client => client.ConsultarProcessoSimplesPorString(args));
+  };
+
+  return sepService;
 };
