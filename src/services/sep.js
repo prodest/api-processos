@@ -13,5 +13,14 @@ module.exports = () => {
         .then( client => client.ConsultarProcessoSimplesPorString( args ) );
     };
 
+    sepService.getDocumentInfoResumed = function( processNumber ) {
+        var args = {
+            numeroProcesso: processNumber
+        };
+
+        return soap.createClient( sep.service_url )
+        .then( client => client.ConsultarProcessoSefazPorNumero( args ) );
+    };
+
     return sepService;
 };
