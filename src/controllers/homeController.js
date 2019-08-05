@@ -111,7 +111,7 @@ module.exports = () => {
                     localUltAndamento: p.LocalUltAndamento,
                     identificacaoDiversas1: p.IdentificacaoDiversas1,
                     identificacaoDiversas2: p.IdentificacaoDiversas2,
-                    subject: p.ItemPlanoClassificacao || p.Assunto,
+                    subject: p.Assunto,
                     summary: p.Resumo,
                     status: p.Situacao,
                     pageUrl: sep.url_web + p.NumeroProcesso,
