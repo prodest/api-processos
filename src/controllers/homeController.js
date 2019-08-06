@@ -23,18 +23,18 @@ module.exports = () => {
         return next(error);
     }
 
+
+
     homeController.getSingle = (req, res, next) => {
+        const service = sepService();
 
         const procNumber = req.params.number;
 
-        const maskSigefes = /^\d{2,13}$/;
-        const maskEDocs = /^20\d{2}-*[0-9b-df-hj-np-tv-xzB-DF-HJ-NP-TV-XZ]{5}$/;
-        const maskProtocol = /^\d{2,8}$/;
-        if (!maskProtocol.test(procNumber) && !maskEDocs.test(procNumber) && !maskSigefes.test(procNumber)) {
+        if (!service.validProtocolNumber(procNumber)) {
             return wrongNumber(next);
         }
 
-        sepService().getDocumentInfo(procNumber)
+        service.getDocumentInfo(procNumber)
             .then(result => {
                 if (!result || typeof result !== 'object') {
                     throw new Error('Result not expected.');
@@ -68,7 +68,6 @@ module.exports = () => {
                     pageUrl: sep.url_web + p.NumeroProcesso
                 };
 
-
                 return res.json(info);
             })
             .catch(err => {
@@ -77,17 +76,15 @@ module.exports = () => {
     };
 
     homeController.getSingleResumed = (req, res, next) => {
+        const service = sepService();
 
         const procNumber = req.params.number;
 
-        const maskSigefes = /^\d{2,13}$/;
-        const maskEDocs = /^20\d{2}-*[0-9b-df-hj-np-tv-xzB-DF-HJ-NP-TV-XZ]{5}$/;
-        const maskProtocol = /^\d{2,8}$/;
-        if (!maskProtocol.test(procNumber) && !maskEDocs.test(procNumber) && !maskSigefes.test(procNumber)) {
+        if (!service.validProtocolNumber(procNumber)) {
             return wrongNumber(next);
         }
 
-        sepService().getDocumentInfoResumed(procNumber)
+        service.getDocumentInfoResumed(procNumber)
             .then(result => {
                 if (!result || typeof result !== 'object') {
                     throw new Error('Result not expected.');
@@ -117,7 +114,6 @@ module.exports = () => {
                     pageUrl: sep.url_web + p.NumeroProcesso,
                     conclusao: p.Conclusao
                 };
-
 
                 return res.json(info);
             })
