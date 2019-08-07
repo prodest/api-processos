@@ -28,8 +28,6 @@ module.exports = () => {
             const sigefesCode = codeBase10.toString().padStart(9, '0');
             protocoloSigefes = '' + year + sigefesCode;
         }
-        console.log("2019003359805");
-        console.log(protocoloSigefes);
 
         return protocoloSigefes;
     }
