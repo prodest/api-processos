@@ -5,7 +5,7 @@ module.exports = () => {
     var sepService = new Object();
 
     const maskSigefes = /^\d{2,13}$/;
-    const maskEDocs = /^20\d{2}-*[0-9b-df-hj-np-tv-xzB-DF-HJ-NP-TV-XZ]{5}$/;
+    const maskEDocs = /^20\d{2}-*[0-9b-df-hj-np-tv-xzB-DF-HJ-NP-TV-XZ]{5,6}$/;
     const maskProtocol = /^\d{2,8}$/;
     const codeCharList = "0123456789BCDFGHJKLMNPQRSTVWXZ";
 
