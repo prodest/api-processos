@@ -42,23 +42,26 @@ module.exports = () => {
 
                 const p = result.ProcessoHistorico;
 
-                if (!p.Interessado) {
+                if (!p.Situacao) {
                     return notFound(next);
                 }
 
-                const updates = p.Andamento.ProcessoLocalizacao.map(a => {
-                    return {
-                        date: moment(a.Data, 'DD/MM/YYYY HH:mm'),
-                        agency: a.Orgao,
-                        area: a.Local,
-                        status: a.Situacao
-                    };
-                });
+                let updates = [];
+                if (p.Andamento && p.Andamento.ProcessoLocalizacao) {
+                    updates = p.Andamento.ProcessoLocalizacao.map(a => {
+                        return {
+                            date: moment(a.Data, 'DD/MM/YYYY HH:mm'),
+                            agency: a.Orgao,
+                            area: a.Local,
+                            status: a.Situacao
+                        };
+                    });
+                }
 
                 const info =
                 {
                     number: p.NumeroEDocs || p.NumeroProcesso,
-                    parts: p.Interessado.string,
+                    parts: p.Interessado ? p.Interessado.string : undefined,
                     subject: p.ItemPlanoClassificacao || p.Assunto,
                     summary: p.Resumo,
                     status: p.Situacao,
