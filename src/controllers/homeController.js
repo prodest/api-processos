@@ -61,7 +61,7 @@ module.exports = () => {
                 const info =
                 {
                     number: p.NumeroEDocs || p.NumeroProcesso,
-                    parts: p.Interessado ? p.Interessado.string : undefined,
+                    parts: p.Interessado ? p.Interessado.string : [],
                     subject: p.ItemPlanoClassificacao || p.Assunto,
                     summary: p.Resumo,
                     status: p.Situacao,
