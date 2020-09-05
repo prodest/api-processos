@@ -28,7 +28,7 @@
     "soap-as-promised": "^1.15.1"
   },
   "devDependencies": {
-    "eslint": "^2.13.1",
+    "eslint": "^4.18.2",
     "eslint-config-prodest": "^1.0.12",
     "standard-version": "^4.4.0"
   }
